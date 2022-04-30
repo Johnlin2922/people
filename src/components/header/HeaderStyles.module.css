@@ -1,0 +1,8 @@
+.header {
+    height: 3rem;
+    border-bottom: 1px solid gray;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    margin-top: 0.5rem;
+}
