@@ -11,7 +11,6 @@ export const BoardContext = createContext({
     setCurrentPosition: () => {},
     onKeyPress: () => {},
     word: "the rock", 
-    rowLength: 0
 });
 
 const getInitialBoardState = (word) => {

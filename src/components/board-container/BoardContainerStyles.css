@@ -1,6 +1,6 @@
 .board-container {
     height: 52vh;
     margin: 0 auto;
-    width: 20rem;
+    width: fit-content;
     margin-top: 1em;
 }
