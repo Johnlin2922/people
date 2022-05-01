@@ -1,8 +1,7 @@
 .header {
     height: 8vh;
     border-bottom: 1px solid gray;
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bolder;
-    margin-top: 0.5rem;
 }

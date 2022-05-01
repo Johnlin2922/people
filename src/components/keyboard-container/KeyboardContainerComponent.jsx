@@ -1,6 +1,9 @@
-import styles from "./KeyboardContainerStyles.module.css"
+import Keyboard from "../keyboard/KeyboardComponent";
+import "./KeyboardContainerStyles.css"
 
 const KeyboardContainer = () => {
-    return (<div className={styles.keyboard_container}></div>);
+    return (<div className="keyboard-container">
+        <Keyboard/>
+    </div>);
 }
 export default KeyboardContainer;
