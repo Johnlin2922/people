@@ -1,5 +1,10 @@
 import { createContext, useState, useEffect } from "react";
 
+const getNewBoardStateFromKeyPress = (key, boardState, currentRow, currentPosition) => {
+    boardState[currentRow][currentPosition] = key;
+    return boardState;
+}
+
 export const BoardContext = createContext({
     boardState: [],
     setBoardState: () => {},
@@ -19,17 +24,19 @@ const BoardContextProvider = (props) => {
 
     useEffect(() => {
         setBoardState(
-            [["A", "P", "P", "L", "E"],
-            ["M", "E", "D", "I", "A"],
-            ["M", "E", "D", "I", "A"], 
-            ["M", "E", "D", "I", "A"], 
-            ["M", "E", "D", "I", "A"],
-            ["M", "E", "D", "I", "A"]]
+            [["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""], 
+            ["", "", "", "", ""], 
+            ["", "", "", "", ""],
+            ["", "", "", "", ""]]
         );
     }, []);
 
     const onKeyPress = (key) => {
-        console.log("context: Key pressed: ", key);
+        boardState[currentRow][currentPosition] = key;
+        setCurrentPosition(currentPosition + 1);
+        setBoardState(boardState);
     }
 
     const value = {
