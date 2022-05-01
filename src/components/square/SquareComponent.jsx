@@ -3,13 +3,24 @@ import "animate.css";
 import { useEffect, useState } from "react";
 
 const Square = (props) => {
-    const { value, space } = props;
+    const { value, space, submit, squareIndex } = props;
     //let animationClass = "";//" animate__animated animate__jello";
-    const [animate, setAnimate] = useState(false);
+    const [animateChange, setAnimateChange] = useState(false);
+    const [animateSubmit, setAnimateSubmit] = useState(false);
+
+    useEffect(() => {
+        animateElement();
+    }, [value, submit]);
 
     const animateElement = () => {
-        setAnimate(true);
-        setTimeout(() => {setAnimate(false)}, 500);
+        if(submit){
+            setTimeout(() => setAnimateSubmit(true), 200 * (squareIndex + 1));
+            setTimeout(() => {setAnimateSubmit(false)}, 400 * (squareIndex + 1));
+        }
+        else{
+            setAnimateChange(true);
+            setTimeout(() => {setAnimateChange(false)}, 500);
+        }
     };
 
     return (
@@ -18,7 +29,8 @@ const Square = (props) => {
                 space
                     ? "space"
                     : "square" +
-                      (animate ? " animate__animated animate__jello" : " ")
+                      (animateChange ? " animate__animated animate__jello " : " ") + 
+                      (animateSubmit ? " animate__animated animate__flipInX " : " ") 
             }
             onClick={animateElement}
         >

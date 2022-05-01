@@ -4,7 +4,7 @@ import { BoardContext } from "../../contexts/BoardContext";
 import { useContext, useEffect } from "react";
 
 const Board = () => {
-    const { boardState } = useContext(BoardContext);
+    const { boardState, currentRow } = useContext(BoardContext);
 
     const setBoardStyle = () => {
         if (boardState !== undefined) {
@@ -18,6 +18,7 @@ const Board = () => {
                     } else {
                         style += "0.25fr ";
                     }
+                    return null;
                 });
                 board.style.gridTemplateColumns = style;
             }
@@ -37,7 +38,9 @@ const Board = () => {
                         <Square
                             value={value}
                             key={rowIndex + "_" + squareIndex}
+                            squareIndex={squareIndex}
                             space={value === "_" ? true : false}
+                            submit={(currentRow > rowIndex) ? true : false}
                         />
                     );
                 });
