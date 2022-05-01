@@ -6,16 +6,20 @@ import { useContext } from "react";
 import { useEffect } from "react";
 
 const Keyboard = () => {
-    const { onKeyPress } = useContext(BoardContext);
+    const { onKeyPress, boardState } = useContext(BoardContext);
 
     const rowOne = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
     const rowTwo = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
     const rowThree = ["enter", "z", "x", "c", "v", "b", "n", "m", "Del"];
 
+    const handleOnKeyPress = (e) => {
+        //console.log(boardState);
+        onKeyPress(e.key);
+    }
+
     useEffect(() => {
-        window.addEventListener("keydown", (event) => {
-            onKeyPress(event.key);
-        });
+        window.addEventListener("keydown", handleOnKeyPress);
+        console.log("eventListenerUseEffect");
     }, []);
 
     return (

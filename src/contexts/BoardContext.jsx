@@ -67,6 +67,7 @@ const BoardContextProvider = (props) => {
             ["", "", "", "", ""],
             ["", "", "", "", ""],
         ]);
+        console.log("contextUseEffect:");
     }, []);
 
     const value = {
