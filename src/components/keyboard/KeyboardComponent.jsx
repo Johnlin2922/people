@@ -11,20 +11,17 @@ const Keyboard = () => {
         <React.Fragment>
             <div className="row">
                 {rowOne.map((char) => {
-                    console.log(char);
-                    return <Button buttonValue={char} />;
+                    return <Button buttonValue={char} key={"keyboard_"+char}/>;
                 })}
             </div>
             <div className="row">
                 {rowTwo.map((char) => {
-                    console.log(char);
-                    return <Button buttonValue={char} />;
+                    return <Button buttonValue={char} key={"keyboard_"+char}/>;
                 })}
             </div>
             <div className="row">
                 {rowThree.map((char) => {
-                    console.log(char);
-                    return <Button buttonValue={char} />;
+                    return <Button buttonValue={char} key={"keyboard_"+char}/>;
                 })}
             </div>
         </React.Fragment>
