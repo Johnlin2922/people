@@ -1,10 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 
-const getNewBoardStateFromKeyPress = (key, boardState, currentRow, currentPosition) => {
-    boardState[currentRow][currentPosition] = key;
-    return boardState;
-}
-
 export const BoardContext = createContext({
     boardState: [],
     setBoardState: () => {},
@@ -13,7 +8,7 @@ export const BoardContext = createContext({
     currentRow: 0,
     currentPosition: 0,
     setCurrentPosition: () => {},
-    onKeyPress: () => {}
+    onKeyPress: () => {},
 });
 
 const BoardContextProvider = (props) => {
@@ -22,33 +17,68 @@ const BoardContextProvider = (props) => {
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
 
-    useEffect(() => {
-        setBoardState(
-            [["", "", "", "", ""],
-            ["", "", "", "", ""],
-            ["", "", "", "", ""], 
-            ["", "", "", "", ""], 
-            ["", "", "", "", ""],
-            ["", "", "", "", ""]]
-        );
-    }, []);
+    const keys = [
+        "q",
+        "w",
+        "e",
+        "r",
+        "t",
+        "y",
+        "u",
+        "i",
+        "o",
+        "p",
+        "a",
+        "s",
+        "d",
+        "f",
+        "g",
+        "h",
+        "j",
+        "k",
+        "l",
+        "enter",
+        "z",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        "m",
+        "Del",
+    ];
 
     const onKeyPress = (key) => {
-        boardState[currentRow][currentPosition] = key;
-        setCurrentPosition(currentPosition + 1);
-        setBoardState(boardState);
-    }
+        console.log("boardState: ", boardState);
+        console.log(key, keys.includes(key));
+        if(keys.includes(key)){
+            boardState[currentRow][currentPosition] = key;
+            setCurrentPosition(currentPosition + 1);
+            setBoardState(boardState);
+        }
+    };
+
+    useEffect(() => {
+        setBoardState([
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+        ]);
+    }, []);
 
     const value = {
         boardState,
         setBoardState,
         currentGuess,
         setCurrentGuess,
-        currentRow, 
-        setCurrentRow, 
+        currentRow,
+        setCurrentRow,
         currentPosition,
-        setCurrentPosition, 
-        onKeyPress
+        setCurrentPosition,
+        onKeyPress,
     };
 
     return (

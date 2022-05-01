@@ -10,7 +10,9 @@ const Button = (props) => {
     let classType = "button";
     classType += buttonValue.length > 1 ? " bigger-button" : "";
 
-    const handleKeyPress = () => {
+    const handleKeyPress = (event) => {
+        console.log(event);
+        event.preventDefault();
         onKeyPress(buttonValue);
     }
 
