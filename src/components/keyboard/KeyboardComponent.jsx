@@ -3,6 +3,7 @@ import Button from "../button/ButtonComponent";
 import "./KeyboardStyles.css";
 
 const Keyboard = () => {
+
     const rowOne = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
     const rowTwo = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
     const rowThree = ["enter", "z", "x", "c", "v", "b", "n", "m", "Del"];

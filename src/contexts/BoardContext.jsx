@@ -5,20 +5,32 @@ export const BoardContext = createContext({
     setBoardState: () => {},
     currentGuess: 0,
     setCurrentGuess: () => {},
-    currentRow: 0
+    currentRow: 0,
+    currentPosition: 0,
+    setCurrentPosition: () => {},
+    onKeyPress: () => {}
 });
 
 const BoardContextProvider = (props) => {
     const [boardState, setBoardState] = useState([]);
     const [currentGuess, setCurrentGuess] = useState(0);
     const [currentRow, setCurrentRow] = useState(0);
+    const [currentPosition, setCurrentPosition] = useState(0);
 
     useEffect(() => {
         setBoardState(
             [["A", "P", "P", "L", "E"],
+            ["M", "E", "D", "I", "A"],
+            ["M", "E", "D", "I", "A"], 
+            ["M", "E", "D", "I", "A"], 
+            ["M", "E", "D", "I", "A"],
             ["M", "E", "D", "I", "A"]]
         );
     }, []);
+
+    const onKeyPress = (key) => {
+        console.log("context: Key pressed: ", key);
+    }
 
     const value = {
         boardState,
@@ -26,7 +38,10 @@ const BoardContextProvider = (props) => {
         currentGuess,
         setCurrentGuess,
         currentRow, 
-        setCurrentRow
+        setCurrentRow, 
+        currentPosition,
+        setCurrentPosition, 
+        onKeyPress
     };
 
     return (
