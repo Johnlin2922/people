@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { SquareType } from "../constants/constants";
+import { getInitialBoardState } from "../utilities/Utilities";
 
 export const BoardContext = createContext({
     boardState: [],
@@ -10,25 +10,8 @@ export const BoardContext = createContext({
     currentPosition: 0,
     setCurrentPosition: () => {},
     onKeyPress: () => {},
-    word: "the rock", 
+    word: "", 
 });
-
-const getInitialBoardState = (word) => {
-    let arr = [];
-    for(let i = 0; i < 6; i++){
-        let row = [];
-        for(let j = 0; j < word.length; j++){
-            if(word[j] === " "){
-                row.push("_");
-            }
-            else{
-                row.push(" ");
-            }
-        }
-        arr.push(row);
-    }
-    return arr;
-}
 
 const BoardContextProvider = (props) => {
     const [boardState, setBoardState] = useState([]);
@@ -36,6 +19,7 @@ const BoardContextProvider = (props) => {
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
     let status = "";
+    const word = "the rock";
 
     const handleSubmit = () => {
         const row = boardState[currentRow];
@@ -102,12 +86,12 @@ const BoardContextProvider = (props) => {
             // console.log("squareValue before: ", boardState[currentRow][currentPosition]);
             // console.log("is space???: ", boardState[currentRow][currentPosition] === "_");
             if(boardState[currentRow][currentPosition] == "_"){
-                boardState[currentRow][currentPosition + 1] = key;
+                boardState[currentRow][currentPosition + 1] = key.toUpperCase();
                 setCurrentPosition(currentPosition + 2);
                 setBoardState(boardState);
             }
             else{
-                boardState[currentRow][currentPosition] = key;
+                boardState[currentRow][currentPosition] = key.toUpperCase();
                 setCurrentPosition(currentPosition + 1);
                 setBoardState(boardState);
 
@@ -117,7 +101,7 @@ const BoardContextProvider = (props) => {
     };
 
     useEffect(() => {
-        const arr = getInitialBoardState("The Rock");
+        const arr = getInitialBoardState(word);
         setBoardState(arr);
     }, []);
 
