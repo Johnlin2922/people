@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { SquareType } from "../constants/constants";
 
 export const BoardContext = createContext({
     boardState: [],
@@ -9,14 +10,45 @@ export const BoardContext = createContext({
     currentPosition: 0,
     setCurrentPosition: () => {},
     onKeyPress: () => {},
-    isInitialized: false, 
+    word: "the rock", 
+    rowLength: 0
 });
+
+const getInitialBoardState = (word) => {
+    let arr = [];
+    for(let i = 0; i < 6; i++){
+        let row = [];
+        for(let j = 0; j < word.length; j++){
+            if(word[j] === " "){
+                row.push("_");
+            }
+            else{
+                row.push(" ");
+            }
+        }
+        arr.push(row);
+    }
+    return arr;
+}
 
 const BoardContextProvider = (props) => {
     const [boardState, setBoardState] = useState([]);
     const [currentGuess, setCurrentGuess] = useState(0);
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
+    let status = "";
+
+    const handleSubmit = () => {
+        const row = boardState[currentRow];
+        console.log(row);
+        setCurrentRow(currentRow + 1);
+        setCurrentPosition(0);
+        if(currentRow === 5){
+            console.log("gameOver")
+            status = "gameOver";
+            window.removeEventListener("keydown", onKeyPress);
+        }
+    }
 
     const keys = [
         "q",
@@ -50,26 +82,44 @@ const BoardContextProvider = (props) => {
     ];
 
     const onKeyPress = (key) => {
-        console.log("boardState: ", boardState);
-        console.log(key, keys.includes(key));
+        // console.log("boardState: ", boardState);
+        // console.log(key, keys.includes(key));
+
+        if(status == "gameOver"){
+            console.log("hit Gameover block");
+            return;
+        }
+
+        if(key === "Enter" || key === "enter"){
+            handleSubmit();
+            return;
+        }
+
+        if(currentPosition >= boardState[currentRow].length){
+            return;
+        }
+
         if(keys.includes(key)){
-            boardState[currentRow][currentPosition] = key;
-            setCurrentPosition(currentPosition + 1);
-            setBoardState(boardState);
-            console.log("currentPosition, ", currentPosition);
+            // console.log("squareValue before: ", boardState[currentRow][currentPosition]);
+            // console.log("is space???: ", boardState[currentRow][currentPosition] === "_");
+            if(boardState[currentRow][currentPosition] == "_"){
+                boardState[currentRow][currentPosition + 1] = key;
+                setCurrentPosition(currentPosition + 2);
+                setBoardState(boardState);
+            }
+            else{
+                boardState[currentRow][currentPosition] = key;
+                setCurrentPosition(currentPosition + 1);
+                setBoardState(boardState);
+
+            }
+            // console.log("currentPosition, ", currentPosition);
         }
     };
 
     useEffect(() => {
-        setBoardState([
-            ["", "", "", "", ""],
-            ["", "", "", "", ""],
-            ["", "", "", "", ""],
-            ["", "", "", "", ""],
-            ["", "", "", "", ""],
-            ["", "", "", "", ""],
-        ]);
-        console.log("contextUseEffect:");
+        const arr = getInitialBoardState("The Rock");
+        setBoardState(arr);
     }, []);
 
     const value = {

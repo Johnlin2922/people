@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { useEffect, useRef } from "react";
 
 const Keyboard = () => {
-    const { onKeyPress, isInitialized } = useContext(BoardContext);
+    const { onKeyPress } = useContext(BoardContext);
 
     const rowOne = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
     const rowTwo = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
@@ -23,10 +23,7 @@ const Keyboard = () => {
     });
 
     useEffect(() => {
-       
         window.addEventListener("keydown", handleOnKeyPress);
-        
-        console.log("listenUseEffect");
     }, []);
 
     return (
