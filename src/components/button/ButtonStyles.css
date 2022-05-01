@@ -5,6 +5,7 @@
     border-radius: 0.5rem;
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .bigger-button {

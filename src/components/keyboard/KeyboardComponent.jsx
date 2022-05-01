@@ -3,23 +3,30 @@ import Button from "../button/ButtonComponent";
 import "./KeyboardStyles.css";
 import { BoardContext } from "../../contexts/BoardContext";
 import { useContext } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Keyboard = () => {
-    const { onKeyPress, boardState } = useContext(BoardContext);
+    const { onKeyPress, isInitialized } = useContext(BoardContext);
 
     const rowOne = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
     const rowTwo = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
     const rowThree = ["enter", "z", "x", "c", "v", "b", "n", "m", "Del"];
 
+    const handleKeepPressCallback = useRef(onKeyPress);
+
     const handleOnKeyPress = (e) => {
-        //console.log(boardState);
-        onKeyPress(e.key);
+        handleKeepPressCallback.current(e.key);
     }
 
     useEffect(() => {
+        handleKeepPressCallback.current = onKeyPress;
+    });
+
+    useEffect(() => {
+       
         window.addEventListener("keydown", handleOnKeyPress);
-        console.log("eventListenerUseEffect");
+        
+        console.log("listenUseEffect");
     }, []);
 
     return (

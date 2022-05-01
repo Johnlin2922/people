@@ -9,6 +9,7 @@ export const BoardContext = createContext({
     currentPosition: 0,
     setCurrentPosition: () => {},
     onKeyPress: () => {},
+    isInitialized: false, 
 });
 
 const BoardContextProvider = (props) => {
@@ -55,6 +56,7 @@ const BoardContextProvider = (props) => {
             boardState[currentRow][currentPosition] = key;
             setCurrentPosition(currentPosition + 1);
             setBoardState(boardState);
+            console.log("currentPosition, ", currentPosition);
         }
     };
 
@@ -79,7 +81,7 @@ const BoardContextProvider = (props) => {
         setCurrentRow,
         currentPosition,
         setCurrentPosition,
-        onKeyPress,
+        onKeyPress
     };
 
     return (
