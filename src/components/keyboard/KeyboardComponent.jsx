@@ -1,3 +1,4 @@
+import React from "react";
 import Button from "../button/ButtonComponent";
 import "./KeyboardStyles.css";
 
@@ -7,7 +8,7 @@ const Keyboard = () => {
     const rowThree = ["enter", "z", "x", "c", "v", "b", "n", "m", "Del"];
 
     return (
-        <div>
+        <React.Fragment>
             <div className="row">
                 {rowOne.map((char) => {
                     console.log(char);
@@ -26,7 +27,7 @@ const Keyboard = () => {
                     return <Button buttonValue={char} />;
                 })}
             </div>
-        </div>
+        </React.Fragment>
     );
 };
 

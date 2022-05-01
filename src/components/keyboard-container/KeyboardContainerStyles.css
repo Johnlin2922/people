@@ -2,4 +2,7 @@
     height: 30vh;
     margin: 0 auto;
     width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
 }
