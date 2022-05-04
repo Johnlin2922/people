@@ -77,7 +77,9 @@ const BoardContextProvider = (props) => {
         }
 
         if(key === "Enter" || key === "enter"){
-            handleSubmit();
+            if(currentPosition == word.length){
+                handleSubmit();
+            }
             return;
         }
 
