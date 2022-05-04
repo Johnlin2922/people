@@ -62,11 +62,14 @@ const BoardContextProvider = (props) => {
         "n",
         "m",
         "Del",
+        "Backspace",
     ];
 
     const onKeyPress = (key) => {
         // console.log("boardState: ", boardState);
-        // console.log(key, keys.includes(key));
+        //console.log(key, keys.includes(key));
+
+        if(currentRow > 6){return;}
 
         if(status == "gameOver"){
             console.log("hit Gameover block");
@@ -78,11 +81,37 @@ const BoardContextProvider = (props) => {
             return;
         }
 
-        if(currentPosition >= boardState[currentRow].length){
-            return;
-        }
-
         if(keys.includes(key)){
+
+            if(key === "Del" || key === "Backspace"){
+                if(currentPosition > 0){
+                    if(boardState[currentRow][currentPosition] == "_"){
+                            boardState[currentRow][currentPosition -1] = " ";
+                            setCurrentPosition(currentPosition - 1);
+                        
+                        setBoardState(boardState);
+                    }
+                    else{
+                        if(boardState[currentRow][currentPosition -1] == "_"){
+                            boardState[currentRow][currentPosition -2] = " "
+                            setCurrentPosition(currentPosition -2);
+                            setBoardState(boardState);
+                        }
+                        else{
+                            boardState[currentRow][currentPosition -1] = " ";
+                            setCurrentPosition(currentPosition -1);
+                            setBoardState(boardState);
+                        }
+        
+                    }
+                }
+                return;
+            }
+
+            if(currentPosition >= boardState[currentRow].length){
+                return;
+            }
+
             // console.log("squareValue before: ", boardState[currentRow][currentPosition]);
             // console.log("is space???: ", boardState[currentRow][currentPosition] === "_");
             if(boardState[currentRow][currentPosition] == "_"){
