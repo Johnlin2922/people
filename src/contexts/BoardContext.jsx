@@ -86,26 +86,30 @@ const BoardContextProvider = (props) => {
         if(keys.includes(key)){
 
             if(key === "Del" || key === "Backspace"){
-                if(currentPosition > 0){
-                    if(boardState[currentRow][currentPosition] == "_"){
-                            boardState[currentRow][currentPosition -1] = " ";
+                if(currentPosition > 0 && currentPosition < word.length){
+                    if(boardState[currentRow][currentPosition].value == "_"){
+                            boardState[currentRow][currentPosition -1].value = " ";
                             setCurrentPosition(currentPosition - 1);
                         
                         setBoardState(boardState);
                     }
                     else{
-                        if(boardState[currentRow][currentPosition -1] == "_"){
-                            boardState[currentRow][currentPosition -2] = " "
+                        if(boardState[currentRow][currentPosition -1].value == "_"){
+                            boardState[currentRow][currentPosition -2].value = " "
                             setCurrentPosition(currentPosition -2);
                             setBoardState(boardState);
                         }
                         else{
-                            boardState[currentRow][currentPosition -1] = " ";
+                            boardState[currentRow][currentPosition -1].value = " ";
                             setCurrentPosition(currentPosition -1);
                             setBoardState(boardState);
                         }
-        
                     }
+                }
+                else{
+                    boardState[currentRow][currentPosition -1].value = " ";
+                    setCurrentPosition(currentPosition -1);
+                    setBoardState(boardState);
                 }
                 return;
             }
@@ -116,13 +120,13 @@ const BoardContextProvider = (props) => {
 
             // console.log("squareValue before: ", boardState[currentRow][currentPosition]);
             // console.log("is space???: ", boardState[currentRow][currentPosition] === "_");
-            if(boardState[currentRow][currentPosition] == "_"){
-                boardState[currentRow][currentPosition + 1] = key.toUpperCase();
+            if(boardState[currentRow][currentPosition].value == "_"){
+                boardState[currentRow][currentPosition + 1].value = key.toUpperCase();
                 setCurrentPosition(currentPosition + 2);
                 setBoardState(boardState);
             }
             else{
-                boardState[currentRow][currentPosition] = key.toUpperCase();
+                boardState[currentRow][currentPosition].value = key.toUpperCase();
                 setCurrentPosition(currentPosition + 1);
                 setBoardState(boardState);
 

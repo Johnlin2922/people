@@ -4,8 +4,43 @@
     border: 1px solid gray;
     border-radius: 5px;
     font-size: 3rem;
+    margin: 3px;
 }
 
 .space {
     width: 1rem;
+}
+
+.blue {
+    background-color: rgb(35, 35, 153);
+}
+
+.yellow {
+    background-color: rgb(236, 255, 96);
+}
+
+.gray {
+    background-color: gray;
+}
+
+.anime {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+        
+    }
+  
+    75% {
+        height: 3.7rem;
+        width: 3.7rem;
+        border: 1px solid gray;
+        border-radius: 5px;
+        font-size: 3rem;
+    }
+  
+    to {
+    }
 }

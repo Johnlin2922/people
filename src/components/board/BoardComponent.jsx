@@ -33,7 +33,7 @@ const Board = () => {
     return (
         <div className="board" id="board">
             {boardState.map((row, rowIndex) => {
-                return row.map((value, squareIndex) => {
+                return row.map(({value, status}, squareIndex) => {
                     return (
                         <Square
                             value={value}

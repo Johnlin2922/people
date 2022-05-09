@@ -13,28 +13,32 @@ const Square = (props) => {
     }, [value, submit]);
 
     const animateElement = () => {
-        if(submit){
+        if (submit) {
             setTimeout(() => setAnimateSubmit(true), 200 * (squareIndex + 1));
-            setTimeout(() => {setAnimateSubmit(false)}, 400 * (squareIndex + 1));
-        }
-        else{
+            setTimeout(() => {
+                setAnimateSubmit(false);
+            }, 400 * (squareIndex + 1));
+        } else {
             setAnimateChange(true);
-            setTimeout(() => {setAnimateChange(false)}, 500);
+            setTimeout(() => {
+                setAnimateChange(false);
+            }, 500);
         }
     };
 
     return (
-        <div
-            className={
-                space
-                    ? "space"
-                    : "square" +
-                      (animateChange ? " animate__animated animate__jello " : " ") + 
-                      (animateSubmit ? " animate__animated animate__flipInX " : " ") 
-            }
-            onClick={animateElement}
-        >
-            {value === "_" ? " " : value}
+        <div className={space ? "space" : "square"}>
+            <div
+                className={
+                    (animateChange ? " anime " : " ") +
+                    (animateSubmit
+                        ? " animate__animated animate__flipInX "
+                        : " ")
+                }
+                onClick={animateElement}
+            >
+                {value === "_" ? " " : value}
+            </div>
         </div>
     );
 };
