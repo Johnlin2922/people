@@ -19,7 +19,7 @@ const BoardContextProvider = (props) => {
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
     let status = "";
-    const word = "elon musk";
+    const word = "floyd";
 
     const handleSubmit = () => {
         const row = boardState[currentRow];
@@ -71,13 +71,13 @@ const BoardContextProvider = (props) => {
 
         if(currentRow > 6){return;}
 
-        if(status == "gameOver"){
+        if(status === "gameOver"){
             console.log("hit Gameover block");
             return;
         }
 
         if(key === "Enter" || key === "enter"){
-            if(currentPosition == word.length){
+            if(currentPosition === word.length){
                 handleSubmit();
             }
             return;
@@ -87,14 +87,14 @@ const BoardContextProvider = (props) => {
 
             if(key === "Del" || key === "Backspace"){
                 if(currentPosition > 0 && currentPosition < word.length){
-                    if(boardState[currentRow][currentPosition].value == "_"){
+                    if(boardState[currentRow][currentPosition].value === "_"){
                             boardState[currentRow][currentPosition -1].value = " ";
                             setCurrentPosition(currentPosition - 1);
                         
                         setBoardState(boardState);
                     }
                     else{
-                        if(boardState[currentRow][currentPosition -1].value == "_"){
+                        if(boardState[currentRow][currentPosition -1].value === "_"){
                             boardState[currentRow][currentPosition -2].value = " "
                             setCurrentPosition(currentPosition -2);
                             setBoardState(boardState);
@@ -120,7 +120,7 @@ const BoardContextProvider = (props) => {
 
             // console.log("squareValue before: ", boardState[currentRow][currentPosition]);
             // console.log("is space???: ", boardState[currentRow][currentPosition] === "_");
-            if(boardState[currentRow][currentPosition].value == "_"){
+            if(boardState[currentRow][currentPosition].value === "_"){
                 boardState[currentRow][currentPosition + 1].value = key.toUpperCase();
                 setCurrentPosition(currentPosition + 2);
                 setBoardState(boardState);
