@@ -3,8 +3,9 @@
     width: 3.5rem;
     border: 1px solid gray;
     border-radius: 5px;
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 3px;
+    justify-content: center;
 }
 
 .space {
@@ -24,23 +25,54 @@
 }
 
 .anime {
-  animation-duration: 1s;
-  animation-name: slidein;
+    animation-duration: 0.05s;
+    animation-name: scale-up-center;
 }
 
-@keyframes slidein {
-    from {
-        
+@-webkit-keyframes scale-up-center {
+    0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
     }
-  
-    75% {
-        height: 3.7rem;
-        width: 3.7rem;
-        border: 1px solid gray;
-        border-radius: 5px;
-        font-size: 3rem;
-    }
-  
-    to {
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }
+@keyframes scale-up-center {
+    0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.flip-horizontal-bottom {
+	-webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+@-webkit-keyframes flip-horizontal-bottom {
+    0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+    }
+    100% {
+      -webkit-transform: rotateX(-180deg);
+              transform: rotateX(-180deg);
+    }
+  }
+  @keyframes flip-horizontal-bottom {
+    0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+    }
+    100% {
+      -webkit-transform: rotateX(-180deg);
+              transform: rotateX(-180deg);
+    }
+  }
+  

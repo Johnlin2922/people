@@ -27,18 +27,19 @@ const Square = (props) => {
     };
 
     return (
-        <div className={space ? "space" : "square"}>
-            <div
-                className={
-                    (animateChange ? " anime " : " ") +
-                    (animateSubmit
-                        ? " animate__animated animate__flipInX "
-                        : " ")
-                }
-                onClick={animateElement}
-            >
-                {value === "_" ? " " : value}
-            </div>
+        <div
+            className={
+                space
+                    ? "space"
+                    : "square" +
+                      (animateChange ? " anime " : " ") +
+                      (animateSubmit
+                          ? " animate__animated animate__flipInX "
+                          : " ")
+            }
+            onClick={animateElement}
+        >
+            <a className="content">{value === "_" ? " " : value}</a>
         </div>
     );
 };
