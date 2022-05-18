@@ -6,3 +6,10 @@
     flex-direction: column;
     gap: 0.05rem;
 }
+
+
+@media (max-width: 600px) {
+    .keyboard-container{
+        width: 100%;
+    }
+}
