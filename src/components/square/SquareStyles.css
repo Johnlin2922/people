@@ -1,9 +1,9 @@
 .square {
-    height: 3.5rem;
-    width: 3.5rem;
+    height: 2.0rem;
+    width: 2.0rem;
     border: 2px solid gray;
     border-radius: 2px;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin: 3px;
     justify-content: center;
 }

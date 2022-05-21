@@ -19,7 +19,7 @@ const BoardContextProvider = (props) => {
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
     let status = "";
-    const word = "FLOYD";
+    const word = "PINK FLOYD";
 
     const handleSubmit = () => {
         let row = boardState[currentRow];
