@@ -32,13 +32,14 @@ const Board = () => {
     return (
         <div className="board" id="board">
             {boardState.map((row, rowIndex) => {
-                return row.map(({value, status}, squareIndex) => {
+                return row.map(({value, result}, squareIndex) => {
                     return (
                         <Square
                             value={value}
                             key={rowIndex + "_" + squareIndex}
                             squareIndex={squareIndex}
                             space={value === "_" ? true : false}
+                            result={result}
                             submit={(currentRow > rowIndex) ? true : false}
                         />
                     );

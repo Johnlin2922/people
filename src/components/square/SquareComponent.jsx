@@ -3,11 +3,12 @@ import "animate.css";
 import { useEffect, useState } from "react";
 
 const Square = (props) => {
-    const { value, space, submit, squareIndex } = props;
+    const { value, space, submit, squareIndex, result} = props;
     //let animationClass = "";//" animate__animated animate__jello";
     const [animateChange, setAnimateChange] = useState(false);
     const [animateSubmit, setAnimateSubmit] = useState(false);
     const [applyColor, setApplyColor] = useState(false);
+    let color = "gray ";
 
     useEffect(() => {
         animateElement();
@@ -40,7 +41,7 @@ const Square = (props) => {
                       (animateSubmit
                           ? "rotate-scale-down "
                           : " ") + 
-                        (applyColor ? "blue " : " ")
+                        (applyColor ? (result === "correct" ? "blue " : "") + (result === "contains" ? "yellow " : "") + (result === "incorrect" ? "gray " : "") : " ")
             }
             onClick={animateElement}
         >
