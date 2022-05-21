@@ -26,11 +26,27 @@ const getHeightFromWord = (word) => {
 
 export const calculateResultsForRow = (row, word) => {
 
+    let arr = word.split("");
+    let containsArray = [];
+
+    console.log(arr.filter((el) => el === "E"));
+
     for(let i = 0; i < row.length; i++){
-        if(word.includes(row[i].value)){
-            row[i].result = "contains";
-            if(row[i].value === word.charAt(i)){
-                row[i].result = "correct";
+        console.log(containsArray);
+        if(arr.includes(row[i].value)){
+            if(!containsArray.includes(row[i].value)){
+            
+                row[i].result = "contains";
+                if(row[i].value === word.charAt(i)){
+                    row[i].result = "correct";
+                    arr[i] = 0;
+                }
+                else{
+                    containsArray.push(row[i].value);
+                }
+            }
+            else{
+                row[i].result = "incorrect";
             }
         }
         else{

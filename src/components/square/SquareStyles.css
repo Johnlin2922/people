@@ -1,7 +1,7 @@
 .square {
     height: calc(360px/var(--word-length));
     width: calc(360px/var(--word-length));
-    border: 1.5px solid gray;
+    border: 2px solid gray;
     border-radius: 2px;
     margin: 1.5px;
     display: flex;
@@ -114,5 +114,18 @@
     100% {
         -webkit-transform: scale(1) rotateZ(360deg);
         transform: scale(1) rotateZ(360deg);
+    }
+}
+
+
+@media (min-width: 500px) {
+    .square {
+        height: calc(360px/var(--word-length) + 1rem);
+        width: calc(360px/var(--word-length) + 1rem);
+        margin: 2px;
+    }
+    
+    .content{
+        font-size: calc((360px/var(--word-length)) * 0.90);
     }
 }
