@@ -36,11 +36,13 @@ const Keyboard = () => {
                 })}
             </div>
             <div className="row">
+                <a className="half-space"> </a>
                 {rowTwo.map((char) => {
                     return (
                         <Button buttonValue={char} key={"keyboard_" + char} />
                     );
                 })}
+                <a className="half-space"> </a>
             </div>
             <div className="row">
                 {rowThree.map((char) => {

@@ -3,3 +3,7 @@
     gap: 0.1rem;
     justify-content: center;
 }
+
+.half-space{
+    flex: 0.5;
+}

@@ -1,8 +1,8 @@
 .keyboard-container {
     height: 40vh;
     margin: 0 auto;
-    width: 25rem;
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 0.05rem;
 }
@@ -11,5 +11,11 @@
 @media (max-width: 600px) {
     .keyboard-container{
         width: 100%;
+    }
+}
+
+@media (min-width: 450px) {
+    .keyboard-container{
+        width: 25rem;
     }
 }
