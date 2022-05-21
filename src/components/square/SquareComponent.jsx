@@ -7,6 +7,7 @@ const Square = (props) => {
     //let animationClass = "";//" animate__animated animate__jello";
     const [animateChange, setAnimateChange] = useState(false);
     const [animateSubmit, setAnimateSubmit] = useState(false);
+    const [applyColor, setApplyColor] = useState(false);
 
     useEffect(() => {
         animateElement();
@@ -17,7 +18,10 @@ const Square = (props) => {
             setTimeout(() => setAnimateSubmit(true), 200 * (squareIndex + 1));
             setTimeout(() => {
                 setAnimateSubmit(false);
-            }, 400 * (squareIndex + 1));
+            }, 800 * (squareIndex + 1));
+
+            setTimeout(() => setApplyColor(true), (200 * (squareIndex + 1)) + 325);
+            
         } else {
             setAnimateChange(true);
             setTimeout(() => {
@@ -30,12 +34,13 @@ const Square = (props) => {
         <div
             className={
                 space
-                    ? "space"
-                    : "square" +
-                      (animateChange ? " anime " : " ") +
+                    ? "space "
+                    : "square " +
+                      (animateChange ? "anime " : " ") +
                       (animateSubmit
-                          ? " animate__animated animate__flipInX "
-                          : " ")
+                          ? "rotate-scale-down "
+                          : " ") + 
+                        (applyColor ? "blue " : " ")
             }
             onClick={animateElement}
         >
