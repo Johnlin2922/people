@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { getInitialBoardState } from "../utilities/Utilities";
+import { getInitialBoardState, calculateResultsForRow } from "../utilities/Utilities";
 
 export const BoardContext = createContext({
     boardState: [],
@@ -19,11 +19,13 @@ const BoardContextProvider = (props) => {
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
     let status = "";
-    const word = "floyd";
+    const word = "FLOYD";
 
     const handleSubmit = () => {
-        const row = boardState[currentRow];
-        console.log(row);
+        let row = boardState[currentRow];
+
+        calculateResultsForRow(row, word);
+
         setCurrentRow(currentRow + 1);
         setCurrentPosition(0);
         if(currentRow === 5){

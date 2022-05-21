@@ -5,10 +5,10 @@ export const getInitialBoardState = (word) => {
         let row = [];
         for(let j = 0; j < word.length; j++){
             if(word[j] === " "){
-                row.push({ value: "_", status: "space" });
+                row.push({ value: "_", status: "space", result: "null" });
             }
             else{
-                row.push({ value: " ", status: "empty" });
+                row.push({ value: " ", status: "empty", result: "null" });
             }
         }
         arr.push(row);
@@ -22,4 +22,19 @@ const getHeightFromWord = (word) => {
         return 6;
     }
     return word.length - numSpace;
+}
+
+export const calculateResultsForRow = (row, word) => {
+
+    for(let i = 0; i < row.length; i++){
+        if(word.includes(row[i].value)){
+            row[i].result = "contains";
+            if(row[i].value === word.charAt(i)){
+                row[i].result = "correct";
+            }
+        }
+        else{
+            row[i].result = "incorrect";
+        }
+    }
 }
