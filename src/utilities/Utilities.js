@@ -18,8 +18,8 @@ export const getInitialBoardState = (word) => {
 
 const getHeightFromWord = (word) => {
     const numSpace = word.split(" ").length - 1
-    if(word.length < 6){
-        return 6;
+    if(word.length < 5){
+        return 5;
     }
     return word.length - numSpace;
 }

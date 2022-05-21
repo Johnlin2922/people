@@ -1,3 +1,7 @@
+:root{
+    --word-length: 6;
+}
+
 .App {
   text-align: center;
   margin: 0;

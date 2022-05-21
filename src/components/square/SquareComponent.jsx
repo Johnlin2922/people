@@ -1,14 +1,11 @@
 import "./SquareStyles.css";
-import "animate.css";
 import { useEffect, useState } from "react";
 
 const Square = (props) => {
     const { value, space, submit, squareIndex, result} = props;
-    //let animationClass = "";//" animate__animated animate__jello";
     const [animateChange, setAnimateChange] = useState(false);
     const [animateSubmit, setAnimateSubmit] = useState(false);
     const [applyColor, setApplyColor] = useState(false);
-    let color = "gray ";
 
     useEffect(() => {
         animateElement();
