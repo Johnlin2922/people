@@ -1,0 +1,7 @@
+.board-row{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+}
