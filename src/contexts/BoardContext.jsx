@@ -107,6 +107,7 @@ const BoardContextProvider = (props) => {
                     }
                 }
                 else{
+                    if(currentPosition === 0){return;}
                     boardState[currentRow][currentPosition -1].value = " ";
                     setCurrentPosition(currentPosition -1);
                     setBoardState(boardState);
