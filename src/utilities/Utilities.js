@@ -25,32 +25,50 @@ const getHeightFromWord = (word) => {
 }
 
 export const calculateResultsForRow = (row, word) => {
-
+    let lettersCount = getLetterCounts(word);
     let arr = word.split("");
-    let containsArray = [];
 
-    console.log(arr.filter((el) => el === "E"));
+    console.log(lettersCount);
 
     for(let i = 0; i < row.length; i++){
-        console.log(containsArray);
-        if(arr.includes(row[i].value)){
-            if(!containsArray.includes(row[i].value)){
-            
+        if(row[i].value === word.charAt(i)){
+            row[i].result = "correct";
+            lettersCount[row[i].value]--;
+        }
+    }
+
+    console.log(lettersCount);
+
+
+    for(let i = 0; i < row.length; i++){
+        if(!(row[i].result === "correct")){
+            if(arr.includes(row[i].value)){
+
                 row[i].result = "contains";
-                if(row[i].value === word.charAt(i)){
-                    row[i].result = "correct";
-                    arr[i] = 0;
+
+                if(lettersCount[row[i].value] > 0){
+                    lettersCount[row[i].value]--;
                 }
                 else{
-                    containsArray.push(row[i].value);
+                    row[i].result = "incorrect";
                 }
             }
             else{
                 row[i].result = "incorrect";
             }
         }
+    }
+}
+
+const getLetterCounts = (word) => {
+    let letters = {};
+    for(let i = 0; i < word.length; i++){
+        if(letters[word[i]]){
+            letters[word[i]]++;
+        }
         else{
-            row[i].result = "incorrect";
+            letters[word[i]] = 1;
         }
     }
+    return letters; 
 }
