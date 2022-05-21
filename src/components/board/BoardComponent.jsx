@@ -24,7 +24,7 @@ const Board = () => {
             }
         }
 
-        document.documentElement.style.setProperty('--word-length', word.length + 1);
+        document.documentElement.style.setProperty('--word-length', word.length + 2);
     };
 
     useEffect(() => {
