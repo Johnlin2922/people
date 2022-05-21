@@ -1,3 +1,5 @@
+import { people } from "../resources/people";
+
 export const getInitialBoardState = (word) => {
     //Status = {"correct", "incorrect", "letterExists"};
     let arr = [];
@@ -28,17 +30,12 @@ export const calculateResultsForRow = (row, word) => {
     let lettersCount = getLetterCounts(word);
     let arr = word.split("");
 
-    console.log(lettersCount);
-
     for(let i = 0; i < row.length; i++){
         if(row[i].value === word.charAt(i)){
             row[i].result = "correct";
             lettersCount[row[i].value]--;
         }
     }
-
-    console.log(lettersCount);
-
 
     for(let i = 0; i < row.length; i++){
         if(!(row[i].result === "correct")){
@@ -71,4 +68,12 @@ const getLetterCounts = (word) => {
         }
     }
     return letters; 
+}
+
+export const getPerson = () => {
+    const today = new Date();
+    if(people[today.getDate()%20] == undefined){
+        return people[0];
+    }
+    return people[today.getDate()%20];
 }

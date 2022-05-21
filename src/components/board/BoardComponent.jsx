@@ -4,7 +4,7 @@ import { BoardContext } from "../../contexts/BoardContext";
 import { useContext, useEffect } from "react";
 
 const Board = () => {
-    const { boardState, currentRow, word } = useContext(BoardContext);
+    const { boardState, currentRow, person } = useContext(BoardContext);
 
     const setBoardStyle = () => {
         if (boardState !== undefined) {
@@ -23,8 +23,7 @@ const Board = () => {
                 board.style.gridTemplateColumns = style;
             }
         }
-
-        document.documentElement.style.setProperty('--word-length', word.length + 2);
+        document.documentElement.style.setProperty('--word-length', person.name.length + 2);
     };
 
     useEffect(() => {

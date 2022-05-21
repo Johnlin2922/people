@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from "react";
-import { getInitialBoardState, calculateResultsForRow } from "../utilities/Utilities";
+import { createContext, useState, useEffect, useInsertionEffect } from "react";
+import { getInitialBoardState, calculateResultsForRow, getPerson } from "../utilities/Utilities";
 
 export const BoardContext = createContext({
     boardState: [],
@@ -10,7 +10,7 @@ export const BoardContext = createContext({
     currentPosition: 0,
     setCurrentPosition: () => {},
     onKeyPress: () => {},
-    word: "", 
+    person: {name: "foo bar"}, 
 });
 
 const BoardContextProvider = (props) => {
@@ -19,12 +19,14 @@ const BoardContextProvider = (props) => {
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
     let status = "";
-    const word = "THE ROCK";
+    let person = getPerson();
+
+    const name = person.name.toUpperCase();
 
     const handleSubmit = () => {
         let row = boardState[currentRow];
 
-        calculateResultsForRow(row, word);
+        calculateResultsForRow(row, name);
 
         setCurrentRow(currentRow + 1);
         setCurrentPosition(0);
@@ -79,7 +81,7 @@ const BoardContextProvider = (props) => {
         }
 
         if(key === "Enter" || key === "enter"){
-            if(currentPosition === word.length){
+            if(currentPosition === name.length){
                 handleSubmit();
             }
             return;
@@ -88,7 +90,7 @@ const BoardContextProvider = (props) => {
         if(keys.includes(key)){
 
             if(key === "Del" || key === "Backspace"){
-                if(currentPosition > 0 && currentPosition < word.length){
+                if(currentPosition > 0 && currentPosition < name.length){
                     if(boardState[currentRow][currentPosition].value === "_"){
                             boardState[currentRow][currentPosition -1].value = "";
                             setCurrentPosition(currentPosition - 1);
@@ -139,8 +141,9 @@ const BoardContextProvider = (props) => {
     };
 
     useEffect(() => {
-        const arr = getInitialBoardState(word);
+        const arr = getInitialBoardState(name);
         setBoardState(arr);
+        
     }, []);
 
     const value = {
@@ -153,7 +156,7 @@ const BoardContextProvider = (props) => {
         currentPosition,
         setCurrentPosition,
         onKeyPress, 
-        word
+        person
     };
 
     return (
