@@ -27,8 +27,7 @@ const Board = () => {
 
     useEffect(() => {
         setBoardStyle();
-        console.log(boardState);
-    }, [boardState]);
+    });
 
     return (
         <div className="board" id="board">
