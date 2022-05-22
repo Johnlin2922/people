@@ -70,6 +70,32 @@ const getLetterCounts = (word) => {
     return letters; 
 }
 
+export const generateShareText = (boardState) => {
+    let shareText = "";
+    for(let i = 0; i < boardState.length; i++){
+        for(let j = 0; j < boardState[i].length; j++){
+            console.log(boardState[i][j].result);
+            if(boardState[i][j].value == "_"){
+                shareText += " ";
+            }
+            else{
+                if(boardState[i][j].result == "correct"){
+                    shareText += "🟦";
+                }
+                else if(boardState[i][j].result == "contains"){
+                    shareText += "🟨";
+                }
+                else{
+                    shareText += "⬜";
+                }
+                
+            }  
+        }
+        shareText += " \n";
+    }
+    return shareText;
+}
+
 export const getPerson = () => {
     // const today = new Date();
     // if(people[today.getDate()%20] == undefined){
