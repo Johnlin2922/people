@@ -18,7 +18,7 @@ export const getInitialBoardState = (word) => {
     return arr;
 }
 
-const getHeightFromWord = (word) => {
+export const getHeightFromWord = (word) => {
     const numSpace = word.split(" ").length - 1
     if(word.length < 5){
         return 5;
@@ -71,9 +71,11 @@ const getLetterCounts = (word) => {
 }
 
 export const getPerson = () => {
-    const today = new Date();
-    if(people[today.getDate()%20] == undefined){
-        return people[0];
-    }
-    return people[today.getDate()%20];
+    // const today = new Date();
+    // if(people[today.getDate()%20] == undefined){
+    //     return people[0];
+    // }
+    // return people[today.getDate()%20];
+    // return{name: "bob"}
+    return people[0];
 }

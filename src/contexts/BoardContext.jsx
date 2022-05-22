@@ -1,5 +1,10 @@
 import { createContext, useState, useEffect, useInsertionEffect } from "react";
-import { getInitialBoardState, calculateResultsForRow, getPerson } from "../utilities/Utilities";
+import {
+    getInitialBoardState,
+    calculateResultsForRow,
+    getPerson,
+    getHeightFromWord,
+} from "../utilities/Utilities";
 
 export const BoardContext = createContext({
     boardState: [],
@@ -10,7 +15,10 @@ export const BoardContext = createContext({
     currentPosition: 0,
     setCurrentPosition: () => {},
     onKeyPress: () => {},
-    person: {name: "foo bar"}, 
+    person: { name: "foo bar" },
+    gameOver: false,
+    showModal: false,
+    setShowModal: () => {},
 });
 
 const BoardContextProvider = (props) => {
@@ -18,7 +26,9 @@ const BoardContextProvider = (props) => {
     const [currentGuess, setCurrentGuess] = useState(0);
     const [currentRow, setCurrentRow] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
-    let status = "";
+    const [gameOver, setGameOver] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
     let person = getPerson();
 
     const name = person.name.toUpperCase();
@@ -30,12 +40,13 @@ const BoardContextProvider = (props) => {
 
         setCurrentRow(currentRow + 1);
         setCurrentPosition(0);
-        if(currentRow === 5){
-            console.log("gameOver")
-            status = "gameOver";
+        if (currentRow === getHeightFromWord(name) - 1) {
+            setGameOver(true);
+            console.log("Game Over");
+            setShowModal(true);
             window.removeEventListener("keydown", onKeyPress);
         }
-    }
+    };
 
     const keys = [
         "q",
@@ -73,68 +84,72 @@ const BoardContextProvider = (props) => {
         // console.log("boardState: ", boardState);
         //console.log(key, keys.includes(key));
 
-        if(currentRow > 6){return;}
-
-        if(status === "gameOver"){
-            console.log("hit Gameover block");
+        if (currentRow > getHeightFromWord(name) - 1) {
             return;
         }
 
-        if(key === "Enter" || key === "enter"){
-            if(currentPosition === name.length){
+        if(key === "8"){
+            setShowModal(true);
+        }
+
+        if (key === "Enter" || key === "enter") {
+            if (currentPosition === name.length) {
                 handleSubmit();
             }
             return;
         }
 
-        if(keys.includes(key)){
+        if (keys.includes(key)) {
+            if (key === "Del" || key === "Backspace") {
+                if (currentPosition > 0 && currentPosition < name.length) {
+                    if (boardState[currentRow][currentPosition].value === "_") {
+                        boardState[currentRow][currentPosition - 1].value = "";
+                        setCurrentPosition(currentPosition - 1);
 
-            if(key === "Del" || key === "Backspace"){
-                if(currentPosition > 0 && currentPosition < name.length){
-                    if(boardState[currentRow][currentPosition].value === "_"){
-                            boardState[currentRow][currentPosition -1].value = "";
-                            setCurrentPosition(currentPosition - 1);
-                        
                         setBoardState(boardState);
-                    }
-                    else{
-                        if(boardState[currentRow][currentPosition -1].value === "_"){
-                            boardState[currentRow][currentPosition -2].value = ""
-                            setCurrentPosition(currentPosition -2);
+                    } else {
+                        if (
+                            boardState[currentRow][currentPosition - 1]
+                                .value === "_"
+                        ) {
+                            boardState[currentRow][currentPosition - 2].value =
+                                "";
+                            setCurrentPosition(currentPosition - 2);
+                            setBoardState(boardState);
+                        } else {
+                            boardState[currentRow][currentPosition - 1].value =
+                                "";
+                            setCurrentPosition(currentPosition - 1);
                             setBoardState(boardState);
                         }
-                        else{
-                            boardState[currentRow][currentPosition -1].value = "";
-                            setCurrentPosition(currentPosition -1);
-                            setBoardState(boardState);
-                        }
                     }
-                }
-                else{
-                    if(currentPosition === 0){return;}
-                    boardState[currentRow][currentPosition -1].value = "";
-                    setCurrentPosition(currentPosition -1);
+                } else {
+                    if (currentPosition === 0) {
+                        return;
+                    }
+                    boardState[currentRow][currentPosition - 1].value = "";
+                    setCurrentPosition(currentPosition - 1);
                     setBoardState(boardState);
                 }
                 return;
             }
 
-            if(currentPosition >= boardState[currentRow].length){
+            if (currentPosition >= boardState[currentRow].length) {
                 return;
             }
 
             // console.log("squareValue before: ", boardState[currentRow][currentPosition]);
             // console.log("is space???: ", boardState[currentRow][currentPosition] === "_");
-            if(boardState[currentRow][currentPosition].value === "_"){
-                boardState[currentRow][currentPosition + 1].value = key.toUpperCase();
+            if (boardState[currentRow][currentPosition].value === "_") {
+                boardState[currentRow][currentPosition + 1].value =
+                    key.toUpperCase();
                 setCurrentPosition(currentPosition + 2);
                 setBoardState(boardState);
-            }
-            else{
-                boardState[currentRow][currentPosition].value = key.toUpperCase();
+            } else {
+                boardState[currentRow][currentPosition].value =
+                    key.toUpperCase();
                 setCurrentPosition(currentPosition + 1);
                 setBoardState(boardState);
-
             }
             // console.log("currentPosition, ", currentPosition);
         }
@@ -143,7 +158,6 @@ const BoardContextProvider = (props) => {
     useEffect(() => {
         const arr = getInitialBoardState(name);
         setBoardState(arr);
-        
     }, []);
 
     const value = {
@@ -155,8 +169,11 @@ const BoardContextProvider = (props) => {
         setCurrentRow,
         currentPosition,
         setCurrentPosition,
-        onKeyPress, 
-        person
+        onKeyPress,
+        person,
+        gameOver,
+        showModal,
+        setShowModal,
     };
 
     return (
