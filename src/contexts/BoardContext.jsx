@@ -36,11 +36,11 @@ const BoardContextProvider = (props) => {
     const handleSubmit = () => {
         let row = boardState[currentRow];
 
-        calculateResultsForRow(row, name);
+        let guessedCorrectly = calculateResultsForRow(row, name);
 
         setCurrentRow(currentRow + 1);
         setCurrentPosition(0);
-        if (currentRow === getHeightFromWord(name) - 1) {
+        if ((currentRow === getHeightFromWord(name) - 1) || guessedCorrectly) {
             setGameOver(true);
             console.log("Game Over");
             setShowModal(true);
