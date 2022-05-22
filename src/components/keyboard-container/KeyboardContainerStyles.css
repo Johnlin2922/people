@@ -12,3 +12,9 @@
         width: 25rem;
     }
 }
+
+/* @media (min-height: 630px) and (max-height: 800px) {
+    .keyboard-container {
+        background-color: red;
+    }
+} */

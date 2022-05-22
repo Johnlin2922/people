@@ -2,5 +2,5 @@
     height: 92vh;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 0.5rem;
 }
