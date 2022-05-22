@@ -103,5 +103,5 @@ export const getPerson = () => {
     // }
     // return people[today.getDate()%20];
     // return{name: "bob"}
-    return people[0];
+    return people[1];
 }
